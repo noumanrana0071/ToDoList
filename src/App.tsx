@@ -1,13 +1,14 @@
 import React from 'react';
-import ToDo from './components/ToDo';
+import { Provider } from 'react-redux';
+import { store } from 'store/store';
+import ToDo from 'components/ToDo';
 
-function App() {
+const App = () => {
   return (
-    <React.Fragment>
-      <ToDo/>
-    </React.Fragment>
-  
+    <Provider store={store}>
+      <ToDo />
+    </Provider>
   );
-}
+};
 
 export default App;
