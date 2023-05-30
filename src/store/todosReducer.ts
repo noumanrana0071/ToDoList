@@ -1,6 +1,5 @@
 import { TodoItem } from 'types/toDoItem';
-import { ADD_TODO, UPDATE_TODO, DELETE_TODO } from 'actions/todosActions';
-
+import { ADD_TODO, UPDATE_TODO, DELETE_TODO } from 'store/todosActions';
 
 interface TodosState {
   todos: TodoItem[];
@@ -15,7 +14,7 @@ const initialState: TodosState = {
   todos: [],
 };
 
-export const todosReducer = (state = initialState, action: Action) => {
+export const todosReducer = (state = initialState, action: Action): TodosState => {
   switch (action.type) {
     case ADD_TODO:
       return { ...state, todos: [...state.todos, action.payload as TodoItem] };

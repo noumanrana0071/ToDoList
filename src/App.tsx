@@ -1,12 +1,14 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from 'store/store';
-import ToDo from 'components/ToDo';
+import ToDoContainer from 'containers/ToDoContainer';
 
 const App = () => {
   return (
     <Provider store={store}>
-      <ToDo />
+      <div className="App">
+        <ToDoContainer />
+      </div>
     </Provider>
   );
 };

@@ -1,7 +1,4 @@
-
-
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import {
   Typography,
   TextField,
@@ -15,26 +12,26 @@ import {
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { addTodo, updateTodo, deleteTodo } from 'actions/todosActions';
-import {TodoItem} from 'types/toDoItem'
+import { TodoItem } from 'types/toDoItem';
 
-interface TodosState {
+interface Props {
   todos: TodoItem[];
+  addTodo: (text: string) => void;
+  updateTodo: (todo: TodoItem) => void;
+  deleteTodo: (id: number) => void;
 }
 
-const ToDo = () => {
+const ToDo = ({ todos, addTodo, updateTodo, deleteTodo }: Props) => {
   const [inputText, setInputText] = useState<string>('');
-  const todos = useSelector((state: TodosState) => state.todos);
-  const dispatch = useDispatch();
   const [editTodoId, setEditTodoId] = useState<number | null>(null);
 
   const handleAddTodo = () => {
     if (inputText) {
       if (editTodoId !== null) {
-        dispatch(updateTodo({ id: editTodoId, text: inputText }));
+        updateTodo({ id: editTodoId, text: inputText });
         setEditTodoId(null);
       } else {
-        dispatch(addTodo(inputText));
+        addTodo(inputText);
       }
       setInputText('');
     }
@@ -51,7 +48,7 @@ const ToDo = () => {
   const handleDeleteTodo = (id: number) => {
     const todoToDelete = todos.find((todo) => todo.id === id);
     if (todoToDelete) {
-      dispatch(deleteTodo(todoToDelete.id));
+      deleteTodo(todoToDelete.id);
     }
   };
 
